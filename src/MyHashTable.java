@@ -137,5 +137,32 @@ public class MyHashTable<K, V> {
     }
 
     public K getKey(V value) {
+        for (int i = 0; i < M; i++) {
+            HashNode<K, V> currentNode = chainArray[i];
+            while (currentNode != null) {
+                if (currentNode.value.equals(value)) {
+                    // Value found, return the corresponding key
+                    return currentNode.key;
+                }
+                currentNode = currentNode.next;
+            }
+        }
+
+        // Value not found
+        return null;
+    }
+
+    public int[] getBucketSizes() {
+        int[] bucketSizes = new int[M];
+        for (int i = 0; i < M; i++) {
+            int count = 0;
+            HashNode<K, V> current = chainArray[i];
+            while (current != null) {
+                count++;
+                current = current.next;
+            }
+            bucketSizes[i] = count;
+        }
+        return bucketSizes;
     }
 }
