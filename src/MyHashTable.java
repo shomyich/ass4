@@ -72,6 +72,22 @@ public class MyHashTable<K, V> {
 
 
     public V get(K key) {
+        int index = hash(key);
+
+        if (chainArray[index] != null) {
+            // Traverse the chain at the index to find the node with the given key
+            HashNode<K, V> currentNode = chainArray[index];
+            while (currentNode != null) {
+                if (currentNode.key.equals(key)) {
+                    // Key found, return the corresponding value
+                    return currentNode.value;
+                }
+                currentNode = currentNode.next;
+            }
+        }
+
+        // Key not found
+        return null;
     }
 
     public V remove(K key) {
