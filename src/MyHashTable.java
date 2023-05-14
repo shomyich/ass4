@@ -91,6 +91,33 @@ public class MyHashTable<K, V> {
     }
 
     public V remove(K key) {
+        int index = hash(key);
+
+        if (chainArray[index] != null) {
+            HashNode<K, V> prevNode = null;
+            HashNode<K, V> currentNode = chainArray[index];
+
+            while (currentNode != null) {
+                if (currentNode.key.equals(key)) {
+                    if (prevNode == null) {
+                        // The node to remove is the head of the chain
+                        chainArray[index] = currentNode.next;
+                    } else {
+                        // The node to remove is not the head of the chain
+                        prevNode.next = currentNode.next;
+                    }
+
+                    size--;
+                    return currentNode.value;
+                }
+
+                prevNode = currentNode;
+                currentNode = currentNode.next;
+            }
+        }
+
+        // Key not found
+        return null;
     }
 
     public boolean contains(V value) {
