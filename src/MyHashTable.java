@@ -40,7 +40,36 @@ public class MyHashTable<K, V> {
 
 
     public void put(K key, V value) {
+        int index = hash(key);
+        HashNode<K, V> newNode = new HashNode<>(key, value);
+
+        if (chainArray[index] == null) {
+            // No nodes exist at the index, insert the new node directly
+            chainArray[index] = newNode;
+        } else {
+            // Traverse the chain at the index to find the appropriate position to insert the new node
+            HashNode<K, V> currentNode = chainArray[index];
+            while (currentNode.next != null) {
+                if (currentNode.key.equals(key)) {
+                    // Key already exists, update the value
+                    currentNode.value = value;
+                    return;
+                }
+                currentNode = currentNode.next;
+            }
+
+            if (currentNode.key.equals(key)) {
+                // Key already exists, update the value
+                currentNode.value = value;
+            } else {
+                // Append the new node to the end of the chain
+                currentNode.next = newNode;
+            }
+        }
+
+        size++;
     }
+
 
     public V get(K key) {
     }
