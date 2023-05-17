@@ -47,6 +47,7 @@ public class MyTestingClass {
             MyTestingClass key = new MyTestingClass(name, age);
             String value = "Value" + i;
             table.put(key, value);
+            System.out.println(key);
         }
 
         // Print the number of elements in each bucket
@@ -65,9 +66,9 @@ public class MyTestingClass {
         String removedValue = table.remove(removeKey);
         System.out.println("Removed value: " + removedValue);
 
-        // Check if a value exists in the table
-        boolean containsValue = table.contains("Value100");
-        System.out.println("Contains value 'Value100': " + containsValue);
+        // Check if a key exists in the table
+        boolean containsKey = table.contains("MyTestingClass@bec91663");
+        System.out.println("New method " + containsKey);
 
         // Get the key for a value
         MyTestingClass keyForValue = table.getKey("Value500");

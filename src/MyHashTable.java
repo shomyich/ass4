@@ -165,4 +165,23 @@ public class MyHashTable<K, V> {
         }
         return bucketSizes;
     }
+    // метотод который будет проверять наличие key
+
+    public boolean containsKey(K key) {
+        int index = hash(key);
+
+        if (chainArray[index] != null) {
+            HashNode<K, V> currentNode = chainArray[index];
+            while (currentNode != null) {
+                if (currentNode.key.equals(key)) {
+                    // Key found in the hash table
+                    return true;
+                }
+                currentNode = currentNode.next;
+            }
+        }
+        // Key not found
+        return false;
+    }
+
 }
